@@ -1,0 +1,12 @@
+prob = optimproblem('ObjectiveSense','maximize'); %最小值时可以直接不带括号，默认最小值
+
+x = optimvar('x',15,3,'Type','integer','LowerBound',0,'UpperBound',1);  %创建一个名为 'x' 的 15×3 二元变量数组。‘Type’定义变量类型，‘LowerBound’定义变量下界，‘UpperBound’定义变量上限
+
+prob.Objective = sum(sum(f.*x));  %定义优化目标函数
+
+
+prob.Constraints.con1 = x(1) + x(2) + x(3) == 7;  %定义函数的约束条件
+
+sol = solve(prob);
+% Or, for nonlinear problems,
+sol = solve(prob,x0)       %求解问题
